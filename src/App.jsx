@@ -334,7 +334,10 @@ export function App() {
       <nav className="mobile-dashboard-tabbar" aria-label="Mobile Navigation">
         <button 
           className={`mobile-tab-btn ${mobileTab === 'map' ? 'active' : ''}`}
-          onClick={() => setMobileTab('map')}
+          onClick={() => {
+            setMobileTab('map');
+            document.getElementById('dashboard-map')?.scrollIntoView({ behavior: 'smooth' });
+          }}
         >
           <MapPin size={17} />
           <span>Map & Sat</span>
@@ -342,7 +345,10 @@ export function App() {
 
         <button 
           className={`mobile-tab-btn ${mobileTab === 'targets' ? 'active' : ''}`}
-          onClick={() => setMobileTab('targets')}
+          onClick={() => {
+            setMobileTab('targets');
+            document.getElementById('dashboard-targets')?.scrollIntoView({ behavior: 'smooth' });
+          }}
         >
           <Navigation size={17} />
           <span>Targets & Layers</span>
@@ -350,7 +356,10 @@ export function App() {
 
         <button 
           className={`mobile-tab-btn ${mobileTab === 'analytics' ? 'active' : ''}`}
-          onClick={() => setMobileTab('analytics')}
+          onClick={() => {
+            setMobileTab('analytics');
+            document.getElementById('dashboard-analytics')?.scrollIntoView({ behavior: 'smooth' });
+          }}
         >
           <BarChart3 size={17} />
           <span>Analytics</span>

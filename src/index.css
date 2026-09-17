@@ -872,14 +872,13 @@ body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
   background: radial-gradient(circle at 50% 0%, #112344 0%, #080f1d 45%, #040811 100%);
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  z-index: 10;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .header-bar {
@@ -1070,11 +1069,11 @@ body {
 .main-layout {
   display: grid;
   grid-template-columns: 310px 1fr 340px;
-  grid-template-rows: 1fr;
+  grid-template-rows: minmax(0, 1fr);
   height: calc(100vh - 61px);
+  min-height: 520px;
   position: relative;
   z-index: 1;
-  overflow: hidden;
 }
 
 @media (max-width: 1200px) and (min-width: 901px) {
@@ -1091,10 +1090,15 @@ body {
   border-right: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  height: 100%;
+  min-height: 0 !important;
+  max-height: 100%;
   -webkit-overflow-scrolling: touch;
   backdrop-filter: blur(16px);
   z-index: 10;
+  overscroll-behavior: contain;
 }
 
 .sidebar-right {
@@ -1973,27 +1977,48 @@ body {
    📱 TABLET PORTRAIT & MOBILE SCREENS (<= 900px)
    -------------------------------------------------------------------------- */
 @media (max-width: 900px) {
-  /* Dashboard Single-Pane Responsive View */
+  /* Dashboard Full Vertical Scroll on Mobile & Tablet */
+  .app-container {
+    height: auto !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-bottom: 70px !important;
+  }
+
   .main-layout {
-    display: block;
-    position: relative;
-    height: calc(100vh - 54px - 56px);
-    overflow: hidden;
-  }
-
-  .main-layout > .sidebar,
-  .main-layout > .map-viewport-container {
-    display: none !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100% !important;
-    border: none;
-  }
-
-  .main-layout > .sidebar.active-mobile,
-  .main-layout > .map-viewport-container.active-mobile {
     display: flex !important;
-    animation: fadeIn 0.15s ease-out;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .map-viewport-container {
+    height: 58vh !important;
+    min-height: 360px !important;
+    max-height: 520px !important;
+    width: 100% !important;
+    display: flex !important;
+    order: 1;
+  }
+
+  .sidebar {
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    overflow-y: visible !important;
+    display: flex !important;
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
+    order: 2;
+  }
+
+  .sidebar-right {
+    display: flex !important;
+    border-left: none !important;
+    order: 3;
   }
 
   /* Fixed Glassmorphic Mobile Dashboard Tab Bar */
