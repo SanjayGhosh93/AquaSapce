@@ -14,11 +14,12 @@ import {
   generateSyntheticMultiSpectralRaster, 
   renderIndexToCanvas 
 } from './services/spectralEngine';
-import { Check } from 'lucide-react';
+import { Check, MapPin, Navigation, BarChart3 } from 'lucide-react';
 
 export function App() {
   const [currentPage, setCurrentPage] = useState('landing');
   const [currentRegion, setCurrentRegion] = useState(PRESET_REGIONS[0]); // Punjab default
+  const [mobileTab, setMobileTab] = useState('map'); // 'map' | 'targets' | 'analytics'
 
   const [user, setUser] = useState(() => {
     try {
@@ -307,6 +308,8 @@ export function App() {
           currentRegion={currentRegion}
           setCurrentRegion={setCurrentRegion}
           onAnalyzeRegion={handleAnalyzeCustom}
+          className={`sidebar-mobile-pane ${mobileTab === 'targets' ? 'active-mobile' : ''}`}
+          onTargetSelected={() => setMobileTab('map')}
         />
 
         <MapViewer
@@ -318,12 +321,41 @@ export function App() {
           opacity={opacity}
           setOpacity={setOpacity}
           onVillageBoxSelected={handleVillageBoxSelected}
+          className={`map-mobile-pane ${mobileTab === 'map' ? 'active-mobile' : ''}`}
         />
 
         <SidebarRight
           currentRegion={currentRegion}
+          className={`sidebar-mobile-pane ${mobileTab === 'analytics' ? 'active-mobile' : ''}`}
         />
       </main>
+
+      {/* Mobile Bottom Navigation Bar for Tablets and Smart Phones */}
+      <nav className="mobile-dashboard-tabbar" aria-label="Mobile Navigation">
+        <button 
+          className={`mobile-tab-btn ${mobileTab === 'map' ? 'active' : ''}`}
+          onClick={() => setMobileTab('map')}
+        >
+          <MapPin size={17} />
+          <span>Map & Sat</span>
+        </button>
+
+        <button 
+          className={`mobile-tab-btn ${mobileTab === 'targets' ? 'active' : ''}`}
+          onClick={() => setMobileTab('targets')}
+        >
+          <Navigation size={17} />
+          <span>Targets & Layers</span>
+        </button>
+
+        <button 
+          className={`mobile-tab-btn ${mobileTab === 'analytics' ? 'active' : ''}`}
+          onClick={() => setMobileTab('analytics')}
+        >
+          <BarChart3 size={17} />
+          <span>Analytics</span>
+        </button>
+      </nav>
 
       <RegionComparisonModal
         isOpen={isCompareModalOpen}

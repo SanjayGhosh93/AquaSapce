@@ -32,7 +32,8 @@ export function MapViewer({
   spectralCanvas,
   opacity,
   setOpacity,
-  onVillageBoxSelected
+  onVillageBoxSelected,
+  className
 }) {
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -56,6 +57,16 @@ export function MapViewer({
   // Map Tile Mode: 'google-hybrid' (Default), 'google-satellite', 'google-road', 'google-terrain'
   const [mapBaseType, setMapBaseType] = useState('google-hybrid');
 
+  // Trigger invalidateSize whenever className changes (e.g. mobile tab switched to 'map')
+  useEffect(() => {
+    if (mapInstanceRef.current) {
+      const timer = setTimeout(() => {
+        mapInstanceRef.current?.invalidateSize();
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [className]);
+
   // Initialize Leaflet Map with Google Maps
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -74,6 +85,14 @@ export function MapViewer({
       L.control.attribution({ position: 'bottomleft', prefix: false })
         .addAttribution('&copy; Google Maps Data | &copy; ESA Copernicus Sentinel-2')
         .addTo(map);
+
+      // Observe container resize for tablets and mobile devices
+      if (typeof ResizeObserver !== 'undefined' && mapContainerRef.current) {
+        const ro = new ResizeObserver(() => {
+          map.invalidateSize();
+        });
+        ro.observe(mapContainerRef.current);
+      }
 
       map.on('mousemove', (e) => {
         setMouseCoords({
@@ -530,11 +549,11 @@ export function MapViewer({
   const beforeAfter = currentRegion.beforeAfter;
 
   return (
-    <div className="map-viewport-container">
+    <div className={`map-viewport-container ${className || ''}`}>
       {/* Top Map HUD Bar with Real-Time Live Indian Location Finder */}
       <div className="map-top-hud">
         {/* Real-time Live Indian City/Village Web Search Bar */}
-        <div style={{ position: 'relative', pointerEvents: 'auto' }}>
+        <div style={{ position: 'relative', pointerEvents: 'auto', maxWidth: '100%' }}>
           <div className="map-hud-pill" style={{ padding: '5px 14px', borderColor: 'var(--accent-cyan)' }}>
             {isSearching ? (
               <Loader2 size={14} color="var(--accent-cyan)" className="animate-spin" />
@@ -563,7 +582,8 @@ export function MapViewer({
                 fontFamily: 'var(--font-sans)',
                 fontWeight: 500,
                 outline: 'none',
-                width: '260px'
+                width: '100%',
+                maxWidth: '240px'
               }}
             />
             {searchQuery && (
@@ -582,7 +602,7 @@ export function MapViewer({
 
           {/* Real-Time Live Results Autocomplete Dropdown */}
           {showSearchResults && searchResults.length > 0 && (
-            <div className="indian-places-dropdown" style={{ width: '360px' }}>
+            <div className="indian-places-dropdown" style={{ width: 'min(360px, calc(100vw - 32px))' }}>
               <div style={{
                 padding: '5px 8px',
                 fontSize: '0.65rem',

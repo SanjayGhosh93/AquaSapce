@@ -1059,7 +1059,7 @@ html, body, #root {
   overflow: hidden;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 901px) {
   .main-layout {
     grid-template-columns: 280px 1fr;
   }
@@ -1909,5 +1909,370 @@ html, body, #root {
   background: rgba(239, 68, 68, 0.25);
   color: #ffffff;
   border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ==========================================================================
+   📱 COMPREHENSIVE RESPONSIVE DESIGN SYSTEM (MOBILE & TABLET)
+   ========================================================================== */
+
+/* Button Label Helpers */
+.btn-text-short {
+  display: none;
+}
+.btn-text-full {
+  display: inline;
+}
+
+/* Mobile Dashboard Bottom Navigation Bar (Hidden by default on Desktop) */
+.mobile-dashboard-tabbar {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   💻 TABLET LANDSCAPE & SMALL DESKTOPS (<= 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .btn-text-full {
+    display: none;
+  }
+  .btn-text-short {
+    display: inline;
+  }
+
+  .telemetry-strip {
+    display: none;
+  }
+
+  .landing-features {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 30px;
+    gap: 18px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   📱 TABLET PORTRAIT & MOBILE SCREENS (<= 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  /* Dashboard Single-Pane Responsive View */
+  .main-layout {
+    display: block;
+    position: relative;
+    height: calc(100vh - 54px - 56px);
+    overflow: hidden;
+  }
+
+  .main-layout > .sidebar,
+  .main-layout > .map-viewport-container {
+    display: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    border: none;
+  }
+
+  .main-layout > .sidebar.active-mobile,
+  .main-layout > .map-viewport-container.active-mobile {
+    display: flex !important;
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  /* Fixed Glassmorphic Mobile Dashboard Tab Bar */
+  .mobile-dashboard-tabbar {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: rgba(7, 14, 28, 0.96);
+    backdrop-filter: blur(18px);
+    border-top: 1px solid rgba(56, 189, 248, 0.28);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px 6px;
+  }
+
+  .mobile-tab-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border-radius: var(--radius-sm);
+    user-select: none;
+  }
+
+  .mobile-tab-btn:hover {
+    color: #e2e8f0;
+  }
+
+  .mobile-tab-btn.active {
+    color: var(--accent-cyan);
+    background: rgba(0, 242, 254, 0.08);
+  }
+
+  .mobile-tab-btn.active svg {
+    filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.7));
+  }
+
+  /* Landing Hero Centering */
+  .landing-hero {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 30px;
+    text-align: center;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-heading {
+    font-size: clamp(2rem, 5.5vw, 2.9rem);
+  }
+
+  .hero-description {
+    margin: 0 auto;
+    font-size: 0.96rem;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .quick-launch-bar {
+    align-items: center;
+  }
+
+  .quick-launch-pills {
+    justify-content: center;
+  }
+
+  .landing-features {
+    grid-template-columns: 1fr;
+    padding: 16px 20px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   📱 MOBILE PHONES & PHABLETS (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Navbar Compact Layout */
+  .landing-navbar {
+    padding: 10px 14px;
+  }
+
+  .brand-sub {
+    display: none !important;
+  }
+
+  .brand-title {
+    font-size: 1.05rem;
+  }
+
+  .brand-logo-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+  }
+
+  .brand-badge {
+    display: none;
+  }
+
+  .header-bar {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .btn-header {
+    padding: 6px 8px;
+    font-size: 0.72rem;
+  }
+
+  .user-profile-chip {
+    padding: 3px 8px 3px 4px;
+    max-width: 120px;
+  }
+
+  .user-profile-chip span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Map HUD & Search Bar */
+  .map-top-hud {
+    flex-wrap: wrap;
+    gap: 6px;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+  }
+
+  .map-hud-pill {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+  }
+
+  .village-floating-hud {
+    width: calc(100vw - 20px);
+    left: 10px;
+    top: 110px;
+    padding: 10px 12px;
+  }
+
+  /* Map View Switcher Layer Controls */
+  .map-view-switcher {
+    bottom: 12px;
+    max-width: calc(100vw - 20px);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 6px;
+    gap: 4px;
+  }
+
+  .map-view-switcher::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn-view-mode {
+    padding: 5px 9px;
+    font-size: 0.72rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Modals Optimization */
+  .modal-overlay {
+    padding: 10px;
+  }
+
+  .modal-dialog {
+    max-width: 96vw !important;
+    max-height: 92vh;
+    width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-header {
+    padding: 10px 14px;
+  }
+
+  .modal-title {
+    font-size: 0.92rem;
+  }
+
+  .modal-body {
+    padding: 14px;
+  }
+
+  .modal-footer {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+  }
+
+  .auth-modal-card {
+    max-width: 95vw;
+    padding: 18px 16px;
+  }
+
+  .band-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .before-after-grid {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   📱 SMALL PHONES (<= 480px, e.g. iPhone SE, Pixel, 360-430px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .hero-heading {
+    font-size: 1.85rem;
+    letter-spacing: -0.02em;
+  }
+
+  .btn-hero-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-revisit-badge {
+    font-size: 0.72rem;
+  }
+
+  /* 3D Earth Globe & Moon Orbit Responsive Scaling */
+  .cosmic-globe-wrapper {
+    width: 270px;
+    height: 270px;
+  }
+
+  .cosmic-earth-sphere {
+    width: 220px;
+    height: 220px;
+  }
+
+  .cosmic-atmosphere-glow {
+    width: 240px;
+    height: 240px;
+  }
+
+  .orbit-track-1 { width: 240px; height: 110px; }
+  .orbit-track-2 { width: 255px; height: 125px; }
+  .orbit-track-3 { width: 235px; height: 135px; }
+  .moon-orbit-track { width: 265px; height: 135px; }
+
+  .orbiting-moon {
+    top: -18px;
+  }
+
+  .moon-sphere-3d {
+    width: 36px;
+    height: 36px;
+  }
+
+  .globe-touch-badge {
+    font-size: 0.68rem;
+    padding: 5px 12px;
+    white-space: nowrap;
+  }
+
+  .btn-header-snapshot,
+  .btn-header-bands {
+    display: none;
+  }
+
+  .auth-tabs {
+    gap: 4px;
+  }
+
+  .auth-tab-btn {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+  }
 }
 

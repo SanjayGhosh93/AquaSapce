@@ -10,7 +10,9 @@ import { PRESET_REGIONS } from '../services/presetsData';
 export function SidebarLeft({
   currentRegion,
   setCurrentRegion,
-  onAnalyzeRegion
+  onAnalyzeRegion,
+  className,
+  onTargetSelected
 }) {
   const [selectedId, setSelectedId] = useState(currentRegion.id);
   const [latInput, setLatInput] = useState(currentRegion.lat.toString());
@@ -31,6 +33,7 @@ export function SidebarLeft({
       setCurrentRegion(found);
       setLatInput(found.lat.toString());
       setLngInput(found.lng.toString());
+      if (onTargetSelected) onTargetSelected();
     }
   };
 
@@ -40,12 +43,12 @@ export function SidebarLeft({
     const lng = parseFloat(lngInput);
     if (!isNaN(lat) && !isNaN(lng)) {
       onAnalyzeRegion(lat, lng);
+      if (onTargetSelected) onTargetSelected();
     }
   };
 
-
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${className || ''}`}>
       {/* 1. Region Selector & Search */}
       <div className="sidebar-section">
         <div className="section-header">

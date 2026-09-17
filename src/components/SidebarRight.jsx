@@ -32,7 +32,7 @@ ChartJS.register(
   Filler
 );
 
-export function SidebarRight({ currentRegion }) {
+export function SidebarRight({ currentRegion, className }) {
   const [timeFilter, setTimeFilter] = useState('30D');
 
   const seriesData = currentRegion.timeSeries?.[timeFilter] || currentRegion.timeSeries['30D'];
@@ -82,7 +82,7 @@ export function SidebarRight({ currentRegion }) {
   };
 
   return (
-    <aside className="sidebar sidebar-right">
+    <aside className={`sidebar sidebar-right ${className || ''}`}>
       {/* 1. Environmental Analytics 4 Cards */}
       <div className="sidebar-section">
         <div className="section-header">

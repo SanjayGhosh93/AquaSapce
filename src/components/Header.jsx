@@ -65,48 +65,50 @@ export function Header({
       {/* Action Buttons with Home on the Right */}
       <div className="header-actions">
         <button 
-          className="btn-header" 
+          className="btn-header btn-header-home" 
           onClick={onGoHome} 
           title="Return to Landing Page"
         >
           <Home size={14} color="var(--accent-cyan)" />
-          <span>Home</span>
+          <span className="btn-text-full">Home</span>
         </button>
 
         <button 
-          className="btn-header" 
+          className="btn-header btn-header-compare" 
           onClick={onOpenCompareModal} 
           title="Compare regions side-by-side"
         >
           <BarChart3 size={14} color="var(--accent-cyan)" />
-          <span>Compare</span>
+          <span className="btn-text-full">Compare</span>
         </button>
 
         <button 
-          className="btn-header" 
+          className="btn-header btn-header-bands" 
           onClick={onOpenBandModal} 
           title="Inspect Multi-Spectral Bands"
         >
           <Layers size={14} />
-          <span>Bands</span>
+          <span className="btn-text-full">Bands</span>
         </button>
 
         <button 
-          className="btn-header primary" 
+          className="btn-header primary btn-header-report" 
           onClick={onOpenReportModal} 
           title="Generate Environmental Audit Report"
         >
           <FileText size={14} />
-          <span>Generate Report</span>
+          <span className="btn-text-full">Generate Report</span>
+          <span className="btn-text-short">Report</span>
         </button>
 
         <button 
-          className="btn-header" 
+          className="btn-header btn-header-snapshot" 
           onClick={onTakeSnapshot} 
           title="Export snapshot"
         >
           <Download size={14} />
-          <span>Snapshot</span>
+          <span className="btn-text-full">Snapshot</span>
+          <span className="btn-text-short">Snap</span>
         </button>
 
         {/* User Account State */}
