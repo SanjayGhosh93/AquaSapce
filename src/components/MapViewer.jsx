@@ -549,7 +549,7 @@ export function MapViewer({
   const beforeAfter = currentRegion.beforeAfter;
 
   return (
-    <div id="dashboard-map" className={`map-viewport-container ${className || ''}`}>
+    <div className={`map-viewport-container ${className || ''}`}>
       {/* Top Map HUD Bar with Real-Time Live Indian Location Finder */}
       <div className="map-top-hud">
         {/* Real-time Live Indian City/Village Web Search Bar */}

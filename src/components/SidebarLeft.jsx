@@ -48,7 +48,7 @@ export function SidebarLeft({
   };
 
   return (
-    <aside id="dashboard-targets" className={`sidebar ${className || ''}`}>
+    <aside className={`sidebar ${className || ''}`}>
       {/* 1. Region Selector & Search */}
       <div className="sidebar-section">
         <div className="section-header">

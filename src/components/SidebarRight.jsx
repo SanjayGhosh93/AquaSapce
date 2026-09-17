@@ -82,7 +82,7 @@ export function SidebarRight({ currentRegion, className }) {
   };
 
   return (
-    <aside id="dashboard-analytics" className={`sidebar sidebar-right ${className || ''}`}>
+    <aside className={`sidebar sidebar-right ${className || ''}`}>
       {/* 1. Environmental Analytics 4 Cards */}
       <div className="sidebar-section">
         <div className="section-header">
